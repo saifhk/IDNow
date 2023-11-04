@@ -1,0 +1,18 @@
+//
+//  Repository.swift
+//  IDNowTechTest
+//
+//  Created by user on 01/11/2023.
+//
+
+import Foundation
+final class TreasureRepository {
+    static let shared = TreasureRepository()
+    private let treasureService = TreasureService.shared
+    let url = "http://localhost:3000/startHunt"
+    func fetchTreasure<T: Codable>() async throws -> T {
+        
+        return try await treasureService.fetchTreasure(from: URL(string: url)!)
+        
+    }
+}
