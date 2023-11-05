@@ -6,11 +6,14 @@
 //
 
 import XCTest
+import Combine
 @testable import IDNowTechTest
 
 class IDNowTechTestTests: XCTestCase {
     var treasureViewModel: TreasureViewModel!
-        override func setUp() {
+    private var cancellables: Set<AnyCancellable> = []
+    
+    override func setUp() {
             super.setUp()
             treasureViewModel = TreasureViewModel()
         }
@@ -18,25 +21,55 @@ class IDNowTechTestTests: XCTestCase {
          treasureViewModel = nil
          super.tearDown()
      }
-    func testFetchTreasureSuccess() {
-            let expectation = XCTestExpectation(description: "Fetching treasure should succeed")
-        treasureViewModel.fetchTreasure ()
-        print("reasureViewModel.state : \(treasureViewModel.state)")
-        switch treasureViewModel.state {
-        case .loaded(let treasure):
-            XCTAssertNotNil(treasure)
-            expectation.fulfill()
-        case .loadError(let error):
-            XCTFail("Fetching treasure should not fail error : \(error)")
-        case .initial, .loading:
-            break
+    
+    func testInitialState() {
+            XCTAssertEqual(treasureViewModel.state, .initial)
         }
-            wait(for: [expectation], timeout: 15.0)
+    
+    func testFetchingTreasureLoaded() {
+        let expectation = XCTestExpectation(description: "Treasure data loaded")
+        treasureViewModel.fetchTreasure()
+        DispatchQueue.global().async {
+            self.treasureViewModel.$state
+                .sink { state in
+                    if case .loaded(_) = state {
+                        expectation.fulfill()
+                    }
+                }
+                .store(in: &self.cancellables)
         }
+        wait(for: [expectation], timeout: 10.0)
+    }
+    
+    func testFetchTreasureSuccess(){
+        let expectation = XCTestExpectation(description: "Treasure data loaded")
+        treasureViewModel.fetchTreasure()
+        DispatchQueue.global().async {            self.treasureViewModel.$state
+                .sink { state in
+                    if case .loaded(let treasure) = state {
+                        XCTAssertNotNil(treasure)
+                        expectation.fulfill()
+                    }
+                    if case .loadError(let error) = state {
+                        XCTFail("the treasure is failed :\(error.debugDescription)")
+                    }
+                }
+                .store(in: &self.cancellables)
+        }
+        wait(for: [expectation], timeout: 10.0)
+    }
     
     func testFetchTreasureFailure() {
         let expectation = XCTestExpectation(description: "Fetching treasure should failed")
-        
+        treasureViewModel.fetchTreasure()
+        switch self.treasureViewModel.state{
+        case .loadError(let error):
+            XCTAssertEqual(error, error.debugDescription)
+            expectation.fulfill()
+        case .loaded(_):
+            XCTFail("Fetching treasure should fail")
+        case .initial, .loading:
+                expectation.fulfill()
+        }
     }
-
 }

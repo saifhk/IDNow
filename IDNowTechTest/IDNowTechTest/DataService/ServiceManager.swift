@@ -7,7 +7,7 @@
 
 import Foundation
 
-class TreasureService : DataServiceDelegate{
+class TreasureService : DataServiceDelegate {
     static let shared = TreasureService()
     let session = URLSession.shared
     func fetchTreasure<T: Codable>(from endpoint: URL) async throws -> T  {
@@ -23,7 +23,6 @@ class TreasureService : DataServiceDelegate{
         }
         guard let decodedResponse = try? JSONDecoder().decode(T.self, from: data)
         else { throw DataError.DecdodingError }
-        
         return decodedResponse
     }
 }

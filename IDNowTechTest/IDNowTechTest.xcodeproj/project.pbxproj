@@ -214,8 +214,8 @@
 			isa = PBXGroup;
 			children = (
 				CE4833272AF78C86004CD2BE /* Extensions */,
-				CEAA9E612AF1E7E5009FC3D6 /* UseCase */,
 				CEAA9E5E2AF1E66E009FC3D6 /* Repository */,
+				CEAA9E612AF1E7E5009FC3D6 /* UseCase */,
 				CEAA9E592AF1E363009FC3D6 /* DataHelper */,
 				CEAA9E562AF1E216009FC3D6 /* Factory */,
 				CEC7034D2AF1A24700135E62 /* DataService */,

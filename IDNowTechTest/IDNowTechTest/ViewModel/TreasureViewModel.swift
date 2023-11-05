@@ -16,13 +16,18 @@ class TreasureViewModel: ObservableObject {
             do {
                 let treasure: TreasureResponse = try await TreasureUseCase.shared.fetchTreasure()
                 state = .loaded(treasure)
+                print("loading data now :",treasure)
             } catch {
                 state = .loadError(error.localizedDescription)
             }
         }
     }
 }
-enum TreasureState {
+
+enum TreasureState : Equatable {
+    static func == (lhs: TreasureState, rhs: TreasureState) -> Bool {
+        true
+    }
     case initial
     case loading
     case loaded(TreasureResponse)
