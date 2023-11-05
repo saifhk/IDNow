@@ -20,13 +20,33 @@ struct TreasureView: View {
             case .loading:
                 Text("Loading...")
             case .loaded(let treasure):
-                Text("Message: \(treasure.message)")
-                Text("Type: \(treasure.type)")
+                getTreasure(treasure: treasure)
             case .loadError(let error):
                 Text("Error: \(error)")
             }
-            Button("Fetch Data") {
-                viewModel.fetchTreasure()
+            Button(action: {
+                           viewModel.fetchTreasure()
+                       }) {
+                           Text("Fetch Data")
+                               .padding()
+                               .background(Color.blue)
+                               .foregroundColor(.white)
+                               .cornerRadius(10)
+                       }
+        }
+    }
+    
+    @ViewBuilder
+    func getTreasure(treasure : TreasureResponse) -> some View {
+        ZStack {
+            VStack {
+                Text(treasure.message)
+                HStack {
+                    Image(treasure.type)
+                                .resizable()
+                                .frame(width: UIScreen.main.bounds.width * 0.9, height: UIScreen.main.bounds.width * 0.9)
+                        }
+                Text(treasure.type)
             }
         }
     }

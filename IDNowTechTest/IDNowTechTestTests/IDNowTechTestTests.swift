@@ -9,31 +9,34 @@ import XCTest
 @testable import IDNowTechTest
 
 class IDNowTechTestTests: XCTestCase {
-
     var treasureViewModel: TreasureViewModel!
-
         override func setUp() {
             super.setUp()
             treasureViewModel = TreasureViewModel()
         }
-
     override func tearDown() {
          treasureViewModel = nil
          super.tearDown()
      }
-
-     func testTreasureViewModelStartHunt() {
-         let expectation = XCTestExpectation(description: "Treasure hunt completed")
-
-         treasureViewModel.onTreasureFound = { treasure in
-             XCTAssertEqual(treasure.type, "Gold", "Treasure type should be Gold")
-             XCTAssertEqual(treasure.message, "You found a treasure!", "Treasure message should match")
-             expectation.fulfill()
-         }
-
-         treasureViewModel.startHunt()
-
-         wait(for: [expectation], timeout: 10) // Adjust the timeout as needed
-     }
+    func testFetchTreasureSuccess() {
+            let expectation = XCTestExpectation(description: "Fetching treasure should succeed")
+        treasureViewModel.fetchTreasure ()
+        print("reasureViewModel.state : \(treasureViewModel.state)")
+        switch treasureViewModel.state {
+        case .loaded(let treasure):
+            XCTAssertNotNil(treasure)
+            expectation.fulfill()
+        case .loadError(let error):
+            XCTFail("Fetching treasure should not fail error : \(error)")
+        case .initial, .loading:
+            break
+        }
+            wait(for: [expectation], timeout: 15.0)
+        }
+    
+    func testFetchTreasureFailure() {
+        let expectation = XCTestExpectation(description: "Fetching treasure should failed")
+        
+    }
 
 }
