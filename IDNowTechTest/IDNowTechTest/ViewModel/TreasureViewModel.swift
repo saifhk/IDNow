@@ -16,7 +16,6 @@ class TreasureViewModel: ObservableObject {
             do {
                 let treasure: TreasureResponse = try await TreasureUseCase.shared.fetchTreasure()
                 state = .loaded(treasure)
-                print("loading data now :",treasure)
             } catch {
                 state = .loadError(error.localizedDescription)
             }

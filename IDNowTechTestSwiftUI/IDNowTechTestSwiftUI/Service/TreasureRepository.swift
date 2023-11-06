@@ -13,7 +13,6 @@ class TreasureService {
         guard let url = Constants.shared.url as? URL else {
             return Fail(error: URLError(.unsupportedURL)).eraseToAnyPublisher()
         }
-
         return session.dataTaskPublisher(for: url)
             .map(\.data)
             .decode(type: TreasureResponse.self, decoder: JSONDecoder())
