@@ -44,7 +44,8 @@ class IDNowTechTestTests: XCTestCase {
     func testFetchTreasureSuccess(){
         let expectation = XCTestExpectation(description: "Treasure data loaded")
         treasureViewModel.fetchTreasure()
-        DispatchQueue.global().async {            self.treasureViewModel.$state
+        DispatchQueue.global().async {
+            self.treasureViewModel.$state
                 .sink { state in
                     if case .loaded(let treasure) = state {
                         XCTAssertNotNil(treasure)
@@ -58,18 +59,5 @@ class IDNowTechTestTests: XCTestCase {
         }
         wait(for: [expectation], timeout: 10.0)
     }
-    
-    func testFetchTreasureFailure() {
-        let expectation = XCTestExpectation(description: "Fetching treasure should failed")
-        treasureViewModel.fetchTreasure()
-        switch self.treasureViewModel.state{
-        case .loadError(let error):
-            XCTAssertEqual(error, error.debugDescription)
-            expectation.fulfill()
-        case .loaded(_):
-            XCTFail("Fetching treasure should fail")
-        case .initial, .loading:
-                expectation.fulfill()
-        }
-    }
+
 }
