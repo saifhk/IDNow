@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE4833242AF673D2004CD2BE /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4833232AF673D2004CD2BE /* Constants.swift */; };
 		CE627D8B2AF4881500EBC96C /* IDNowTechTestSwiftUIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE627D8A2AF4881500EBC96C /* IDNowTechTestSwiftUIApp.swift */; };
 		CE627D8D2AF4881500EBC96C /* TreasureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE627D8C2AF4881500EBC96C /* TreasureView.swift */; };
 		CE627D8F2AF4881C00EBC96C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE627D8E2AF4881C00EBC96C /* Assets.xcassets */; };
@@ -40,6 +41,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CE4833232AF673D2004CD2BE /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		CE627D872AF4881500EBC96C /* IDNowTechTestSwiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IDNowTechTestSwiftUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE627D8A2AF4881500EBC96C /* IDNowTechTestSwiftUIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDNowTechTestSwiftUIApp.swift; sourceTree = "<group>"; };
 		CE627D8C2AF4881500EBC96C /* TreasureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreasureView.swift; sourceTree = "<group>"; };
@@ -83,6 +85,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CE4833222AF673B8004CD2BE /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				CE4833232AF673D2004CD2BE /* Constants.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
 		CE627D7E2AF4881500EBC96C = {
 			isa = PBXGroup;
 			children = (
@@ -106,6 +116,7 @@
 		CE627D892AF4881500EBC96C /* IDNowTechTestSwiftUI */ = {
 			isa = PBXGroup;
 			children = (
+				CE4833222AF673B8004CD2BE /* Utilities */,
 				CE9B00E02AF48DAE0003A3A0 /* UseCase */,
 				CE9B00DD2AF48D730003A3A0 /* Service */,
 				CE9B00D72AF48D1F0003A3A0 /* Model */,
@@ -323,6 +334,7 @@
 				CE9B00E22AF48DBC0003A3A0 /* TreasureUseCase.swift in Sources */,
 				CE9B00D92AF48D310003A3A0 /* Models.swift in Sources */,
 				CE9B00E62AF48DFB0003A3A0 /* TreasureViewModel.swift in Sources */,
+				CE4833242AF673D2004CD2BE /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -11,7 +11,6 @@ class TreasureUseCase {
     static let shared = TreasureUseCase()
     private let treasureRepository = TreasureRepository.shared
     func fetchTreasure<T: Codable>() async throws -> T {
-       
         return try await treasureRepository.fetchTreasure()
     }
 }

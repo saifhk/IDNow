@@ -22,7 +22,11 @@ class TreasureViewModel: ObservableObject {
         }
     }
 }
-enum TreasureState {
+
+enum TreasureState : Equatable {
+    static func == (lhs: TreasureState, rhs: TreasureState) -> Bool {
+        true
+    }
     case initial
     case loading
     case loaded(TreasureResponse)

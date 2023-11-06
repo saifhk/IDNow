@@ -9,10 +9,8 @@ import Foundation
 final class TreasureRepository {
     static let shared = TreasureRepository()
     private let treasureService = TreasureService.shared
-    let url = "http://localhost:3000/startHunt"
     func fetchTreasure<T: Codable>() async throws -> T {
-        
+        let url = InfoPlistParser.getKey(forKey: "URL")
         return try await treasureService.fetchTreasure(from: URL(string: url)!)
-        
     }
 }

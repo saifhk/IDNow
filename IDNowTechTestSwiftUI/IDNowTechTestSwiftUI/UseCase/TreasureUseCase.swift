@@ -10,7 +10,6 @@ import Combine
 final class TreasureUseCase {
     private let service: TreasureService
     init(service: TreasureService) {self.service = service}
-    
     func fetchTreasure() -> AnyPublisher<TreasureResponse, Error> {
         return service.fetchTreasure()
     }

@@ -10,10 +10,9 @@ import Combine
 class TreasureService {
     let session = URLSession.shared
     func fetchTreasure() -> AnyPublisher<TreasureResponse, Error> {
-        guard let url = URL(string: "http://localhost:3000/startHunt") else {
+        guard let url = Constants.shared.url as? URL else {
             return Fail(error: URLError(.unsupportedURL)).eraseToAnyPublisher()
         }
-
         return session.dataTaskPublisher(for: url)
             .map(\.data)
             .decode(type: TreasureResponse.self, decoder: JSONDecoder())
